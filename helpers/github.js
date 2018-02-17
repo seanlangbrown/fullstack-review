@@ -26,7 +26,7 @@ let getReposByUsername = (username) => {
         console.log('processing a repo');
         let repo = repos[i];
         //console.log(repo);
-        let rankScore = repo.forks_count / repo.watchers_count;
+        let rankScore = 0;//repo.watchers_count > 0 ? repo.forks_count / repo.watchers_count : 0;
         db.save(repo.id, repo.owner.login, repo.name, repo.forks_count, repo.watchers_count, repo.url, rankScore);
       }
     }

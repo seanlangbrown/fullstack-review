@@ -9,7 +9,7 @@ let repoSchema = mongoose.Schema({
   },
   username: String,
   name: String,
-  rankScore: Number,
+  rankscore: Number,
   forks: Number,
   watchers: Number,
   url: String,
@@ -33,13 +33,11 @@ let getTopRepos = (cb) => {
   //Repo.find({}).exec(cb);//.limit(25).sort({ rankScore: -1 }).select({})
   var query = Repo.find({});
 
-  // selecting the `name` and `occupation` fields
-  query.select('username name url forks watchers rankScore');
+  query.select('id username name url forks watchers rankscore');
+  query.sort({ forks: -1 });
 
-  // execute the query at a later time
   query.exec(function (err, repos) {
     if (err) return handleError(err);
-    // Prints "Space Ghost is a talk show host."
     console.log('repos: ', repos);
     cb(repos);
   });
