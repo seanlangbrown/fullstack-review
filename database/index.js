@@ -24,13 +24,27 @@ let save = (id, username, name, forks, watchers, url, rankScore) => {
   console.log('saving repo in mongoDB');
   let repo = new Repo({id: id, name: name, username: username, url: url, forks: forks, watchers: watchers, rankscore: rankScore});
   repo.save((err) => {
-    if (err) return console.error(err);
+    if (err) console.error(err);
   });
 }
 
-let getTopRepos = () => {
-  return;//Repo.find({});
+let getTopRepos = (cb) => {
+  console.log('Retrieving top repos')
+  //Repo.find({}).exec(cb);//.limit(25).sort({ rankScore: -1 }).select({})
+  var query = Repo.find({});
+
+  // selecting the `name` and `occupation` fields
+  query.select('username name url forks watchers rankScore');
+
+  // execute the query at a later time
+  query.exec(function (err, repos) {
+    if (err) return handleError(err);
+    // Prints "Space Ghost is a talk show host."
+    console.log('repos: ', repos);
+    cb(repos);
+  });
 }
+
 
 module.exports.save = save;
 module.exports.getTopRepos = getTopRepos;
