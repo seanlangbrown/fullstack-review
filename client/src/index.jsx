@@ -13,6 +13,20 @@ class App extends React.Component {
 
   }
 
+  populate () {
+    console.log('getting top 25 repos');
+    $.ajax({
+      type: 'GET',
+      url: '/repos',
+      contentType: 'application/json',
+      success: (data) => {
+        this.setState({
+          repos: data
+        })
+      }
+    });
+  }
+
   search (term) {
     console.log(`${term} was searched`);
     $.ajax({
@@ -27,6 +41,10 @@ class App extends React.Component {
         console.log('POST ERROR', errorString, errorThrown);
       }
     })
+  }
+
+  componentWillMount() {
+    populate();
   }
 
   render () {
