@@ -28,15 +28,16 @@ class App extends React.Component {
   }
 
   search (term) {
+    console.log('querying', term);
     console.log(`${term} was searched`);
     $.ajax({
       type: 'POST',
       url: '/repos',
       dataType: 'json',
-      data: JSON.stringify(term)''
-      success: (data) {
+      data: {username: term},
+      success: (data) => {
         console.log('POST success');
-      }
+      },
       error: (jqxhr, errorString, errorThrown) => {
         console.log('POST ERROR', errorString, errorThrown);
       }
@@ -44,7 +45,7 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    populate();
+    this.populate();
   }
 
   render () {
