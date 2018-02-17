@@ -17,7 +17,7 @@ app.post('/repos', function (req, res) {
   // save the repo information in the database
   console.log('fetching from github', req.body.username);
   github.getReposByUsername(req.body.username);
-  res.end();
+  res.json('POST Response Success');
 });
 
 app.get('/repos', function (req, res) {
