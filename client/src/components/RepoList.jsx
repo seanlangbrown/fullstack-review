@@ -6,7 +6,7 @@ const RepoList = (props) => (
     <h4> Repo List Component </h4>
     There are {props.repos.length} repos.
     <ol>
-    {_.map(props.repos, (repo) => (<li key={repo.id}><a href={repo.url}>{repo.name}</a></li>))}
+    {_.map(props.repos, (repo) => (<li key={repo.id}><a href={repo.url}>{repo.name}</a> forks: {repo.forks}</li>))}
     </ol>
   </div>
 )
