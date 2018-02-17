@@ -1,6 +1,6 @@
 const request = require('request');
 const config = require('../config.js');
-const db = require('./database/index.js');
+const db = require('../../database/index.js');
 
 let getReposByUsername = (username) => {
   // TODO - Use the request module to request repos for a specific
@@ -20,8 +20,12 @@ let getReposByUsername = (username) => {
     if (err) {
       console.log(err);
     } else {
-      console.log('repos received', repos);
-      db.save(repos.owner.name, repos.name, repos.url, repos.forks_count, repos.watchers_count,)
+      console.log('repos received', repos)
+      for (var i = 0; i < repos.length, i++) {
+        let repo = repos[i];
+        let rankScore = repo.forks_count / repo.watchers_count;
+        db.save(repo.id, repo.owner.name, repo.name, repo.url, repo.forks_count, repo.watchers_count, rankScore);
+      }
     }
   });
   //.on('error', (err) => (console.log(err)))
