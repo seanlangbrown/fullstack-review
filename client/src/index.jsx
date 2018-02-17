@@ -38,6 +38,7 @@ class App extends React.Component {
       data: {username: term},
       success: (data) => {
         console.log('POST success');
+        this.populate();
       },
       error: (jqxhr, errorString, errorThrown) => {
         console.log('POST ERROR', errorString, errorThrown);
