@@ -34,6 +34,7 @@ let getTopRepos = (cb) => {
   var query = Repo.find({});
 
   query.select('id username name url forks watchers rankscore');
+  query.limit(25);
   query.sort({ forks: -1 });
 
   query.exec(function (err, repos) {
