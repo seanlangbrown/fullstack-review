@@ -20,6 +20,7 @@ class App extends React.Component {
       url: '/repos',
       contentType: 'application/json',
       success: (data) => {
+        console.log('repos received', data);
         this.setState({
           repos: data
         })
